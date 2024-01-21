@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Flowify</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link href="style.css" rel="stylesheet">
+        <script src="script.js"></script>
+        <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+        </script>
+    </head>
+
+    <body>
+        <h1>Flowify Music</h1>
+        <div class="container">
+            <div id="deviceSection" class="row">
+            
+                <div class="col">
+    
+                    <div class="mb-3">
+                        <label for="playlists" class="form-label">Choose a Playlist:</label>
+                        <select id="playlists"  onchange="HandlePlaylistChange()" class="form-control"></select>
+                    </div>                
+                </div>
+            </div>
+        </div>
+            <div class="flex-container" id="flex-container">
+                <div class="loading">
+                    <div class="x"></div>
+                    <div class="x"></div>
+                    <div class="x"></div>
+                    <div class="x"></div>
+                    <div class="x"></div>
+                    <div class="x"></div>
+                    <div class="x"></div>
+                    <div class="x"></div>
+                </div>
+
+            </div>
+            <div id="tracks">
+                <div id="table-wrapper">
+                    <div id="table-scroll">
+                        <div id="OutputTracks-centre">
+                            <table id="OutputTracks">
+                                <tbody id="TableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class = "subtitle" id="subtitle2">Select a target shape:</h2>
+            <div class="chooseGraph" id="chooseGraph">
+                <div class="chartOptions" onclick="reorderedGraph(0, -9000000, 9, 0, 1, 0, 0)">
+                    <canvas id="bottomTop"></canvas>
+                </div>
+                <div class="chartOptions" onclick="reorderedGraph(0, 9000000, 9, 0, -1, 0, 0)">
+                    <canvas id="topBottom"></canvas>
+                </div>
+                <div class="chartOptions" onclick="reorderedGraph(0.5, -30, 9, 7, 0, 1, 0)">
+                    <canvas id="curvyUp"></canvas>
+                </div>
+                <div class="chartOptions" onclick="reorderedGraph(0.5, 175, 9, 1, 0, 1, 0)">
+                    <canvas id="curvyDown"></canvas>
+                </div>
+                <div class="chartOptions" onclick="reorderedGraph(0.157079632, 1, 40, 40, 0, 0, -10)">
+                    <canvas id="droop"></canvas>
+                </div>
+                <div class="chartOptions" onclick="reorderedGraph(0.157079632, 1, 40, 40, 0, 0, 10)">
+                    <canvas id="hill"></canvas>
+                </div>
+            </div>
+            <div class="chosenGraph" id="chosenGraph">
+                
+                <div class="radioButtons">
+                    <div>
+                        <input type="checkbox" onclick="changeFeature('energy')" checked = true name="traits" id="energy">
+                        <label class="trait" onclick="changeFeature('energy')" for="energy">Energy</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" onclick="changeFeature('danceability')" name="traits" id="danceability">
+                        <label class="trait" onclick="changeFeature('danceability')" for="danceability">Danceability</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" onclick="changeFeature('acousticness')" name="traits" id="acousticness">
+                        <label class="trait" onclick="changeFeature('acousticness')" for="acousticness">Acousticness</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" onclick="changeFeature('speechiness')" name="traits" id="speechiness">
+                        <label class="trait" onclick="changeFeature('speechiness')" for="speechiness">speechiness</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" onclick="changeFeature('liveness')" name="traits" id="liveness">
+                        <label class="trait" onclick="changeFeature('liveness')" for="liveness">liveness</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" onclick="changeFeature('instrumentalness')" name="traits" id="instrumentalness">
+                        <label class="trait" onclick="changeFeature('instrumentalness')" for="instrumentalness">instrumentalness</label>
+                    </div>
+                </div>
+                <hr class="rounded">
+                <canvas id="chosenChart"></canvas>
+                
+                
+            </div>
+            <button class = "exportButton" id = "exportButton" onclick="openDialog()">export</button>
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                <div class="modalHeader">
+                    <!-- <span onclick="hideDialog()" class="close">&times;</span> -->
+                    <h4>Export:</h4>
+                    
+                </div>
+                <div class="modalBody">
+                    <input autocomplete="off" type="text" name="plName" id="plName">
+                    <!-- <input type="checkbox" name="removeOld" id="removeOld"> -->
+                    <button class="dialogButtons" role="button" onclick="getUserInfo()">Export</button>
+                </div>
+                </div>
+            
+            </div>
+            <dialog id="dialogBox">
+                <input type="text" name="plName" id="plName">
+                <input type="checkbox" name="removeOld" id="removeOld">
+                <button class="exportbutton" role="button" onclick="hideDialog()">Close Me!</button>
+                <button class="exportbutton" role="button" onclick="getUserInfo()">Export or smth</button>
+            <dialog> 
+        <div id="bw">
+        </div>
+    </body>
+
+</html>
