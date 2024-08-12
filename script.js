@@ -152,7 +152,7 @@ function updateUI(energies, names, minEnergy, maxEnergy) {
 
 async function fetchUserProfile() {
     try {
-        const response = await fetch('https://your_heroku_app_url/user-profile');
+        const response = await fetch('http://localhost:3000/user-profile');
         if (!response.ok) {
             throw new Error('Failed to fetch user profile');
         }
