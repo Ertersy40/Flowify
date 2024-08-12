@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', fetchPlaylists);
 
 function fetchPlaylists() {
     // console.log("fetching playlists")
-    fetch('http://localhost:300/user-playlists')
+    fetch('http://localhost:3000/user-playlists')
     .then(response => response.json())
     .then(playlistsData => {
         handlePlaylistsResponse(playlistsData)
@@ -44,7 +44,7 @@ function handlePlaylistsResponse(playlistsData){
 
 function fetchTracks(playlistId) {
     // Return the fetch promise chain
-    return fetch(`http://localhost:300/playlist-tracks/${playlistId}`)
+    return fetch(`http://localhost:3000/playlist-tracks/${playlistId}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -73,7 +73,7 @@ async function getFeatures(ids, names, idswOrder) {
 }
 
 async function fetchAudioFeatures(ids) {
-    const response = await fetch(`http://localhost:300/audio-features?ids=${ids.join(',')}`);
+    const response = await fetch(`http://localhost:3000/audio-features?ids=${ids.join(',')}`);
     if (!response.ok) {
         throw new Error('Failed to fetch audio features');
     }
@@ -174,7 +174,7 @@ async function exportPlaylist() {
     };
 
     try {
-        const response = await fetch('http://localhost:300/create-playlist', {
+        const response = await fetch('http://localhost:3000/create-playlist', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -198,7 +198,7 @@ async function exportTracks(playlistId) {
     for (let i = 0; i < matched.length; i += 99) {
         const trackBatch = matched.slice(i, i + 99).map(track => `spotify:track:${track.id}`);
         try {
-            await fetch('http://localhost:300/add-tracks', {
+            await fetch('http://localhost:3000/add-tracks', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
