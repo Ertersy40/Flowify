@@ -157,12 +157,15 @@ async function fetchUserProfile() {
             throw new Error('Failed to fetch user profile');
         }
         const userProfile = await response.json();
-        return userProfile.id; // This is the Spotify User ID
+        console.log('Fetched user profile:', userProfile); // Log the full response
+        return userProfile.id; // Ensure this is the correct path to the user ID
     } catch (error) {
         console.error('Error fetching user profile:', error);
-        // Handle error appropriately
+        // Return undefined explicitly or handle the error
+        return undefined;
     }
 }
+
 
 async function exportPlaylist() {
     const name = document.getElementById("plName").value || "Default rip";
