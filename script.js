@@ -200,6 +200,7 @@ async function exportPlaylist() {
 
 async function exportTracks(playlistId) {
     for (let i = 0; i < matched.length; i += 99) {
+        console.log("Exporting trackkkk", i)
         const trackBatch = matched.slice(i, i + 99).map(track => `spotify:track:${track.id}`);
         try {
             await fetch('http://localhost:3000/add-tracks', {
