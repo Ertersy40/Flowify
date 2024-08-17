@@ -200,11 +200,14 @@ async function exportPlaylist() {
 
 async function exportTracks(playlistId) {
     for (let i = 0; i < matched.length; i += 99) {
-        console.log("TEST")
         console.log("Exporting trackkkk", i)
-        console.log("Matched content:", matched);
+        console.log(matched)
 
-        const trackBatch = matched.slice(i, i + 99).map(track => `spotify:track:${track.id}`);
+        // Filter out any null or undefined entries
+        const trackBatch = matched.slice(i, i + 99)
+            .filter(track => track && track.id) // Filter out invalid tracks
+            .map(track => `spotify:track:${track.id}`);
+        
         try {
             await fetch('http://localhost:3000/add-tracks', {
                 method: 'POST',
@@ -213,13 +216,15 @@ async function exportTracks(playlistId) {
                 },
                 body: JSON.stringify({ playlistId: playlistId, tracks: trackBatch })
             });
-            await new Promise(r => setTimeout(r, 500)); // Rate limiting
+
+            // Introduce a delay to handle rate limiting
+            await new Promise(r => setTimeout(r, 500)); 
         } catch (error) {
             console.error('Error adding tracks:', error);
-            // Handle error
         }
     }
 }
+
 
 
 
