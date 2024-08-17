@@ -174,6 +174,7 @@ async function exportPlaylist() {
     };
 
     try {
+        console.log("sending body:", body)
         const response = await fetch('http://localhost:3000/create-playlist', {
             method: 'POST',
             headers: {
