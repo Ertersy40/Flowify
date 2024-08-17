@@ -200,6 +200,7 @@ async function exportPlaylist() {
 
 async function exportTracks(playlistId) {
     for (let i = 0; i < matched.length; i += 99) {
+        console.log("TEST")
         console.log("Exporting trackkkk", i)
         console.log("Matched content:", matched);
 
